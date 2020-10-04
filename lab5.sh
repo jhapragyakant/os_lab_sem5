@@ -113,3 +113,31 @@ do
 esac
 done
 comment
+
+<<'comment'
+rows=4
+for((i=1; i<=rows; i++))
+do
+  for((j=1; j<=i; j++))
+  do
+    echo -n "* "
+  done
+  echo
+done
+comment
+
+
+echo -e "Enter the Basic Salary:\c"
+read bs
+
+if [ $bs -lt 1500 ]
+then
+    HRA=$(echo "$bs*0.1" | bc)
+    DA=$(echo "$bs*0.9" |bc)
+    GS=$(echo "$bs+$HRA+$DA" | bc)
+else
+    HRA=500
+    DA=$(echo "$bs*0.98" | bc)
+    GS=$(echo "$bs+$HRA+$DA" |bc)
+fi
+echo "Gross Salary:$GS"
